@@ -1,0 +1,55 @@
+#oppgave 1
+from sympy import symbols, solve
+
+# Definer symboler
+q_O, q_C, P = symbols('q_O q_C P')
+
+# Invers etterspørselsfunksjon
+P = 990 - (1/60)*(q_O + q_C)
+
+# Konstante marginale kostnader
+MC = 50
+
+# Faste kostnader
+fixed_costs = 3000000
+
+# Optimal produksjon for Olivita
+q_O_optimal = solve((P - MC)*q_O - fixed_costs, q_O)[0]
+
+# Optimal produksjon for Dr. Choice AS
+q_C_optimal = solve((P - MC)*q_C - fixed_costs, q_C)[0]
+
+# Sett inn optimal produksjon for å finne optimal pris
+optimal_price = P.subs({q_O: q_O_optimal, q_C: q_C_optimal})
+
+# Vis resultater
+print("Optimal produksjon for Olivita:", q_O_optimal.evalf())
+print("Optimal produksjon for Dr. Choice AS:", q_C_optimal.evalf())
+print("Optimal pris:", optimal_price.evalf())
+
+#Oppgave 2
+from sympy import symbols, solve
+
+# Definerer symbolene
+Q, q_G, q_B, q_M = symbols('Q q_G q_B q_M')
+
+# Etterspørselsfunksjonen
+demand = 177 - 4 * Q
+
+# Løsning for totalt kvantum (Q) basert på etterspørsel
+total_quantity = solve(demand, Q)[0]
+
+# Kvantum for hvert bryggeri basert på deres andel av det totale kvantumet
+q_G = total_quantity / 3  # Graff Bryggehus
+q_B = total_quantity / 3  # Bryggeri 13
+q_M = total_quantity / 3  # Mack Mikrobryggeri
+
+# Markedspris før fusjon
+market_price = 177 - 4 * total_quantity
+
+# Skriv ut resultatene
+print("Totalt kvantum før fusjon:", total_quantity)
+print("Kvantum for Graff Bryggehus før fusjon:", q_G)
+print("Kvantum for Bryggeri 13 før fusjon:", q_B)
+print("Kvantum for Mack Mikrobryggeri før fusjon:", q_M)
+print("Markedspris før fusjon:", market_price)
